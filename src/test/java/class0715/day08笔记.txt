@@ -1,0 +1,141 @@
+1、maven
+	作用：项目构建工具,是目前大部分企业在做项目时首选的项目构建，管理工具。
+	在我们课程中最大的作用管理jar包。
+	第三方jar（工具包）
+	
+	创建项目
+		Group Id：分组
+		Artifact Id：项目包名（简单理解为jar包名）
+		Version：版本
+		Packaging：打包方式
+	pom.xml添加依赖：
+		<dependencies>
+			<dependency>
+				...
+			</dependency>
+			...
+		</dependencies>
+	maven项目结构
+		src/main/java
+		一般是开发人员写代码的目录
+		src/main/resources
+		开发人员放项目资源文件的目录
+		src/test/java
+		放测试人员代码的目录
+		src/test/resources
+		放测试资源文件的目录
+		Maven Dependencies
+		通过maven拿下来的项目依赖包存放目录
+		target
+		存放构建后文件的目录
+	Maven的几个常用构建命令
+		mvn package：打包
+		mvn install：安装到本地仓库
+		mvn test：执行单元测试代码
+
+2、JSON
+	简介
+		JSON(JavaScript Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式。
+		简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。
+		易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。
+	语法
+		1.对象表示为键值对，数据由逗号分隔，花括号保存对象，方括号保存数组。
+		2、json数据类型
+			字符串 	："abc", "123"
+			数字		： 1 ,  1.21
+			对象		：{"name" : "张三"}
+			数组		：[1,2,3]
+			boolean	：true，false
+			null 	：null
+		3.常用对象：
+			{"name": "张三", "age": 18, "score":100}   => JAVA对象Student Teacher。反序列化
+				java对象=> JSON字符串 序列化。	
+		4.常用数组
+			[{"name": "张三", "age": 18},{"name": "李四", "age": 16}]
+			
+		5.组合使用
+		{
+			"name": "中国",
+			"provinces": [{
+				"name": "黑龙江",
+				"capital": "哈尔滨"
+			}, {
+				"name": "广东",
+				"capital": "广州"
+			}, {
+				"name": "湖南",
+				"capital": "长沙"
+			}]
+		}
+	JSON解析
+		fastJson
+	Java对象与JSON之间的相互转换(（对象变成json字符串）序列化与（json字符串变成对象）反序列化操作)
+		1.字符串转对象
+			String json = "{name:\"张三\",age:\"18\"}";
+			Student s1 = JSONObject.parseObject(json, Student.class);
+		2.对象转字符串
+			Student s1 = new Student("张三",18);
+			String jsonString = JSONObject.toJSONString(s1);
+		3.map转字符串
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("error", "1");
+			map.put("msg", "系统错误");
+			String jsonString = JSONObject.toJSONString(map);
+		4.字符串数组转成List集合
+			String json = "[{\"age\":18,\"name\":\"张三\"},{\"age\":17,\"name\":\"李四\"}]";
+			List<Student> list = JSONObject.parseArray(json, Student.class);
+3、Properties
+	properties文件：项目当中比较常见的配置文件。
+	特点：以键值对的形式保存数据
+	作用：通过将系统配置定义在properties文件的形式来实现代码解耦。
+	
+	解析：
+		Properties properties = new Properties();
+		File file = new File("log4j.properties");
+		InputStream inStream = new FileInputStream(file);
+		properties.load(inStream);
+	获取：
+		properties结构：跟map一样是属于字典类型的数据结构。
+		取数据：properties.getProperty(key)。
+	IO流：
+		流向：
+			输入流 read  读
+				InputStream
+				FileInputStream
+				FileReader
+			输出流 write 写
+				OutputStream
+				FileOutputStream
+				FileWriter
+		类型
+			字节流（读写任意文件）
+				FileInputStream
+				FileOutputStream
+			字符流（只能读写纯文本文件）中文
+				FileReader
+				FileWriter 
+		关流
+			用完之后关闭流。
+		File                  FileInputStream（读）   FileOutputStream（写）
+		编译时异常
+			如果不处理，代码就报错。IO异常。
+			必须要处理。未雨绸缪。
+			如何处理：
+				1、throws Exception 往外抛出异常。
+					
+				2、try ｛
+					//可能会报错的代码
+				｝ catch 捕获异常 ｛
+					//异常出现之后处理方式
+				｝
+				//。。。。 剩下的代码能够继续执行。
+		运行时异常
+			只有在运行时才有肯能会出现的异常。
+			NullPotionException
+			IndexOutOfBoundsException
+			ClassCaseException 
+			
+下节课内容：
+	1、excel 解析	
+		
+		

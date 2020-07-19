@@ -1,0 +1,118 @@
+循环
+	1、格式
+		for(初始化语句 1 ;条件判断语句 2 ;循环体执行之后的语句 4) {
+			循环体 3 ;
+		}
+		
+	2、执行流程
+			1 --> 2 --> 3 --> 4 --> 2 --> 3 --> 4 --> 2 false 结束
+				true				true
+			最少
+			1 --> 2 false 结束 循环的右大括号
+			
+	增强for循环:
+		for(数据类型 变量名 : 数组或者集合名) {
+		}
+		增强for和普通for的区别是：增强for不能直接拿到索引。
+		
+	求和思想：
+		int sum = 0;
+		for (int i = 1; i <= 10; i++) {
+			sum += i;
+		}
+		System.out.println(sum);
+	while格式：
+		初始化语句 1
+		while(条件判断语句2) {
+			循环体3;
+			循环体执行之后的语句4;
+		}
+		执行流程 : 和for 是一样
+			1 --> 2 --> 3 --> 4 --> 2 --> 3 --> 4 --> 2 false 结束
+					true				true
+			最少
+			1 --> 2 false 结束 循环的右大括号
+	do while 格式（了解）
+		初始化语句 1
+		do {
+			循环体3;
+			循环体执行之后的语句4;
+		}while(条件判断语句2);
+		
+		特点：do while 至少会执行一次循环体。
+	循环控制语句
+		continue;	//跳出本次循环，继续下次循环
+		break;		//跳出全部循环
+		
+	嵌套循环
+		for (int i = 1; i <= 4; i++) {				//控制行
+			for (int j = 1; j <= 5; j++) {			//控制列
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+
+条件控制语句
+	1、格式
+	2、执行流程	
+		格式1：
+			if() {
+				true进入 if 语句体
+			}
+		格式2：
+			if() {
+				true进入 if 语句体
+			}else {
+				false进入 else 语句体
+			}
+		格式3：
+			if() {
+				当前true进入 if 语句体
+			}else if () {
+				当前true进入 if 语句体
+			}else if () {
+				当前true进入 if 语句体
+			}...
+			else {
+				所有的if或者else if 都不满足则进入 else
+			}
+		格式3和多个if的区别
+			格式3是分支流程，最终只会进入一个if。
+			多个if是只要满足条件就能进入if，不存在互斥。
+	switch（了解）
+		switch(值) {
+			case 值1:
+				语句；
+				break;
+			case 值2:
+				语句；
+				break;
+			case 值3:
+				语句；
+				break;
+			default:
+				语句；
+				break;
+		}
+		
+		switch(值)值的类型：byte、short、int、char、String、枚举
+		switch什么时候结束，遇到break和}。
+		break穿透：没有遇到break，不会再次进行case匹配。
+	
+	if和 switch 的区别：
+		if的第三种格式 
+			if else if .... else 
+		和switch执行流程是非常相似的。
+		switch需要匹配的值是一个范围的时候，那么很难用。
+		if的条件更加丰富，只要表达式结果是boolean类型就ok。
+		switch只是一个值的比较。
+		什么时候用switch:只比较值是否相等，且数量较少的时候。性能高过if。
+		95%都使用if。
+
+下节课内容：
+	1、面向对象概念
+	2、方法、构造方法
+	3、成员变量和局部变量的区别		
+	
+	
+	

@@ -1,0 +1,84 @@
+1、如何导入maven项目
+	
+2、xml（了解）
+	XML：Extensible Markup Language,扩展性标记语言 HTML
+	特点：
+		可扩展性，在遵循xml语法的前提下支持自定义和修改。
+	<?xml version="1.0" encoding="utf-8"?>  		xml声明
+	<person id="1" > 								根元素，它是所有其他元素的父元素	
+		<name>
+			<firstname>zhang</firstname>
+			<lastname>san</lastname>
+		</name>
+		
+		<name xxx= />
+		<age>23</age>
+		<gender>男</gender>
+	</person>
+	根标签有且只能有一个。
+	所有元素有开始就有结束 
+	大小写是敏感的
+	嵌套使用需要注意嵌套的顺序
+	元素的属性值必须要用“”引起来
+	注释：<!--此处为注释-->
+	
+	dom4j解析技术
+		1、添加依赖：dom4j
+		2、创建解析器SaxReader对象
+		3、获取document对象
+		4、获取根元素
+		5、获取根元素下的子元素
+	
+3、excel（重点）
+	POI技术
+		Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。
+	maven坐标
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
+
+	读：
+		// 1、找到excel
+		File file = new File("src/test/resources/student.xls");
+		// 1.1、打开了excel
+		Workbook workbook = WorkbookFactory.create(file);
+		// 2、选择sheet
+		Sheet sheet = workbook.getSheetAt(0);
+		// 3、遍历row
+		for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+			// 4、获取row
+			Row row = sheet.getRow(i); // ctrl + 2 + l
+			Cell idCell = row.getCell(0, MissingCellPolicy.CREATE_NULL_AS_BLANK);
+			idCell.setCellType(CellType.STRING);
+			Cell nameCell = row.getCell(1, MissingCellPolicy.CREATE_NULL_AS_BLANK);
+			nameCell.setCellType(CellType.STRING);
+			Cell ageCell = row.getCell(2, MissingCellPolicy.CREATE_NULL_AS_BLANK);
+			ageCell.setCellType(CellType.STRING);
+			System.out.println(idCell.getStringCellValue() + "," + nameCell.getStringCellValue() + ","
+					+ ageCell.getStringCellValue());
+		}
+	
+	写：
+		// 1、找到excel
+		//输入流 把文件读入到java内存中
+		FileInputStream fis = new FileInputStream("src/test/resources/student.xls");
+		// 1.1、打开了excel
+		Workbook workbook = WorkbookFactory.create(fis);
+		// 2、选择sheet
+		Sheet sheet = workbook.getSheetAt(0);
+		Row row = sheet.getRow(1);
+		Cell cell = row.getCell(1, MissingCellPolicy.CREATE_NULL_AS_BLANK);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue("张三2");
+		//输出流，把java内存中的内容写到文件中
+		FileOutputStream fos = new FileOutputStream("src/test/resources/student.xls");
+		workbook.write(fos);
+		fos.close();
+
+下节课：
+	1、基础阶段内容总结
+	2、testng入门
+		
+		

@@ -1,0 +1,144 @@
+1、接口和抽象类（了解）
+	接口：规则，规范行为。只能有抽象方法，一个类可以同时实现多个接口，必须重写所有抽象方法。
+		接口与接口是继承，接口与类是实现。
+	接口是对继承的补充。
+		interface implements
+	定义一个接口
+	public interface Inter {
+		//默认修饰符 public abstract 可以省略
+		public abstract void show();
+	}
+	实现一个接口
+	public Student implements Inter {
+		public abstract void show() {
+			System.out.println("show...");
+		}
+	}
+	
+	案例：
+	父接口中的抽象方法就是规则，为什么呢？因为规范返回值、参数类型、方法名
+	public interface Inter {
+		//抽象方法没有方法体。
+		public abstract int show();			//规则1
+		
+		void print(int a);					//规则2
+	}
+	 
+	public class Imp implements Inter {
+
+		public int show() {			//遵循了规则1	重写
+			//...任意代码	
+		}
+		
+		public void print(int a) {	//遵循了规则2	重写
+			//...任意代码	
+		}
+	}
+		
+	抽象类：不能创建对象的类（不能new），与普通类的唯一区别是可以用抽象方法。子类可以继承抽象类，但必须重写抽象方法。
+		abstract
+	定义一个抽象类。	
+	public abstract class BaseCase {
+	
+		public BaseCase() {}
+		
+		public abstract void info();
+		
+		public void getData() {
+			System.out.println("getData...");
+		}
+	}
+	
+		/*
+		 * JAVA提供了八大基本数据类型对应的引用数据类型。
+		 * boolean			Boolean
+		 * byte				Byte
+		 * char				Character
+		 * short			Short
+		 * int				Integer
+		 * long				Long
+		 * float			Float
+		 * double			Double
+		 */
+		//静态方法，不需要创建对象，直接类名.调用
+		int i = Integer.parseInt("123");
+		System.out.println(i* 10);
+2、ArrayList
+	继承关系
+		Iterable
+			- Collection
+				- List 有序，可重复
+					- ArrayList
+				- Set  无序，不可重复
+					- HashSet
+	本质：数组
+	特点：长度可变数组，提供很多方便的方法。有序，可重复。
+	ArrayList<T> list = new ArrayList<T>();
+	泛型：规定集合存储的数据类型。
+	常用API:
+		添加数据:add(…)
+		取出数据:get(…)
+		获取list集合的大小：size()
+		其他API：
+		移除数据：remove(…)
+		isEmpty(…),判空函数
+		contains(…),判断是否包含某数据
+		set(…)，修改某个位置
+
+	遍历集合：
+		普通for
+		增强for
+		迭代器：
+			iterator()：获取迭代器
+			hasNext()：迭代器通过指针下移判断是否有数据
+			next()：取数据		
+					
+	toString()：
+		toString()是来自Object类中的方法，当我们使用System.out.println(s)输出时自动会调用toString();
+		重写toString()就是为了方便打印。
+	
+	
+3、HashSet
+	特点：无序，不可重复。
+	HashSet<T> set = new HashSet<T>(); 
+	常用API
+		添加数据：add(…)
+		size() , 获取集合的大小
+		其他API
+		size() , 获取集合的大小
+		删除数据：remove(…)
+		contains()，判断是否包含某数据
+		isEmpty() , 判断集合是否为空
+		clear(), 将集合里的所有数据清空
+		toArray(),将集合转化成为对应数据类型的数组
+	遍历集合：
+		增强for
+		迭代器
+4、HashMap 
+	特点：键值对。一个键对应一个值，键不能重复。存储重复的键后会覆盖之前的值。
+	HashMap<K,V> map = new HashMap<K,V>();
+
+	Map
+		- HashMap
+	
+	常用API
+		添加数据：put(…) 
+		取值：get(…)
+		获取所有的键：keySet(…)
+		其他API：size(),containsKey(…),containsValue(…)
+		移除：remove(…)
+		获取或有的值：values(…)
+
+	遍历集合：
+		增强for
+		迭代器
+		Entry：
+			Set<Map.Entry<K,V>> entrySet = map.entrySet();
+			for(Entry e : entrySet) {
+				System.out.println(e.getKey() + "===" + e.getValue());
+			}
+	
+下节课内容：
+	1、maven安装、配置
+	2、json解析，fastjson学习。
+	3、Properties类学习
