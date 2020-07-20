@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="LemonJava20_maven" />
+        <module name="Lemon_Java20_maven" />
       </profile>
     </annotationProcessing>
   </component>

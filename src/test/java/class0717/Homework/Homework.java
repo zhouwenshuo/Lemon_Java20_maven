@@ -63,7 +63,7 @@ public class Homework {
         使用Properties类的中方法读取到java程序中并输出在控制台上。
          */
         Properties properties = new Properties();
-        File file = new File("D:\\LemonJava20_maven\\src\\test\\java\\class0717\\Homework\\config.properties");
+        File file = new File("src\\test\\java\\class0717\\Homework\\config.properties");
         FileInputStream fis = new FileInputStream(file);
         properties.load(fis);
         System.out.println("USERNAME:"+properties.getProperty("USERNAME"));
