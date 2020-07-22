@@ -60,39 +60,29 @@ public class Homework1 {
         Workbook sheets = WorkbookFactory.create(fis);
         Sheet sheet = sheets.getSheetAt(0);
 
-//        Cell cell = sheet.getRow(1).getCell(2);
-//        cell.setCellType(CellType.STRING);
-//        cell.setCellValue("Pass");
-        int lastRowNum = sheet.getLastRowNum();
-        ArrayList<ArrayList<String>> list1 = new ArrayList<>();
-        for(int i=1;i<=lastRowNum;i++) {             //循环行
-            Row row = sheet.getRow(i);
-            int lastCellNum = row.getLastCellNum();
-            ArrayList<String> list2 = new ArrayList<>();
-            for(int j=0;j<lastCellNum;j++) {       //循环列
-                Cell cell = row.getCell(j, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                cell.setCellType(CellType.STRING);
-                String cellValue = cell.getStringCellValue();
-                list2.add(cellValue);
-            }
-            list1.add(list2);
-        }
-        System.out.println(list1);
 
-        //遍历，判断对象中的行列值和excel每行的行列值是否相同，相同就写入
-        for (int i=0;i<=list1.size();i++){
-            for (WriteBackData writeBackData : arrayList){
-                for (int j=0;j<list1.get(j).size();j++){
-                    if (writeBackData.getRowNum().toString().equals(list1.get(j).get(0))&&writeBackData.getCellNum().toString().equals(list1.get(j).get(1))){
-                        Row row = sheet.getRow(writeBackData.getRowNum());
-                        //5、获取指定cell
-                        Cell cell = row.getCell(2, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                        //6、修改值
-                        cell.setCellValue(writeBackData.getContent());
-                    }
+        int lastRowNum = sheet.getLastRowNum();
+        ArrayList<String> arrayList1 = new ArrayList<>();
+        Cell cell = null;
+        for (WriteBackData writeBackData : arrayList){ //遍历对象
+            for (int i=1;i<=lastRowNum;i++){   //循环行
+                Row row = sheet.getRow(i);
+                int lastCellNum = row.getLastCellNum();
+                arrayList1.clear();
+                for (int j=0;j<lastCellNum;j++){   //循环列
+                    cell = row.getCell(j,Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                    String cellValue = cell.getStringCellValue();
+                    System.out.println(String.format("第%d行第%d列的值为%s",i,j+1,cellValue));
+                    arrayList1.add(cellValue);
+                }
+                System.out.println(String.format("第%d行的数据%s:",i,arrayList1.toString()));
+                if (writeBackData.getRowNum().equals(arrayList1.get(0))&&writeBackData.getCellNum().equals(arrayList1.get(1))){
+                    row.getCell(2,Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(writeBackData.getContent());
                 }
             }
         }
+
+        //输出流，把内存的数据修改进文件里
         FileOutputStream fos = newFos(filepath);
         sheets.write(fos);
         closeFis(fis);

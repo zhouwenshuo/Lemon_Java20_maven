@@ -27,14 +27,14 @@ package class0720.Homework;
  * 　　　　　　┃┫┫　┃┫┫
  * 　　　　　　┗┻┛　┗┻┛+ + + +
  */
-public class Validate {
+public class JsonValidate {
     private String value;
     private String expression;
 
-    public Validate() {
+    public JsonValidate() {
     }
 
-    public Validate(String value, String expression) {
+    public JsonValidate(String value, String expression) {
         this.value = value;
         this.expression = expression;
     }

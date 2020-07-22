@@ -46,6 +46,20 @@ public class Homework2 {
     public static void main(String[] args) {
         String s1 = "[{\"value\":0,\"expression\":\"$.code\"},{\"value\":\"OK\",\"expression\":\"$.msg\"},{\"value\":\"OK\",\"expression\":\"OK\"}]";
         String s2 = "[{\"value\":\"OK\",\"expression\":\"OK\"},{\"value\":\"OK\",\"expression\":\"OK\"},{\"value\":\"OK\",\"expression\":\"OK\"}]";
+        List<JsonValidate> jsonValidates1 = JSONObject.parseArray(s1,JsonValidate.class);
+        List<JsonValidate> jsonValidates2 = JSONObject.parseArray(s2,JsonValidate.class);
+        for (JsonValidate jsonValidate : jsonValidates2){
+            System.out.println(jsonValidate);
+        }
+
+        for (JsonValidate jsonValidate : jsonValidates1){
+            if (jsonValidate.getValue().equals(jsonValidate.getExpression())){
+                System.out.println("Pass");
+            }else {
+                System.out.println("Fail");
+            }
+        }
+
 //        List<Validate>
 //        List<HashMap> list1 = JSONObject.parseArray(s1,HashMap.class);
 //        List<HashMap> list2 = JSONObject.parseArray(s2,HashMap.class);

@@ -41,16 +41,16 @@ public class WriteBackData {
         this.content = content;
     }
 
-    public Integer getRowNum() {
-        return rowNum;
+    public String getRowNum() {
+        return rowNum.toString();
     }
 
     public void setRowNum(Integer rowNum) {
         this.rowNum = rowNum;
     }
 
-    public Integer getCellNum() {
-        return cellNum;
+    public String getCellNum() {
+        return cellNum.toString();
     }
 
     public void setCellNum(Integer cellNum) {
