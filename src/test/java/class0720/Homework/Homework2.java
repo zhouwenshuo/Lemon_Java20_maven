@@ -46,19 +46,20 @@ public class Homework2 {
     public static void main(String[] args) {
         String s1 = "[{\"value\":0,\"expression\":\"$.code\"},{\"value\":\"OK\",\"expression\":\"$.msg\"},{\"value\":\"OK\",\"expression\":\"OK\"}]";
         String s2 = "[{\"value\":\"OK\",\"expression\":\"OK\"},{\"value\":\"OK\",\"expression\":\"OK\"},{\"value\":\"OK\",\"expression\":\"OK\"}]";
-        List<HashMap> list1 = JSONObject.parseArray(s1,HashMap.class);
-        List<HashMap> list2 = JSONObject.parseArray(s2,HashMap.class);
-        for (HashMap hashMap : list2){
-            System.out.println(hashMap.keySet());
-        }
-        for (HashMap hashMap : list1){
-            System.out.println(hashMap.get("value")+","+hashMap.get("expression"));
-            if (hashMap.get("value").equals(hashMap.get("expression"))){
-                System.out.println("Pass");
-            }else{
-                System.out.println("Fail");
-            }
-        }
+//        List<Validate>
+//        List<HashMap> list1 = JSONObject.parseArray(s1,HashMap.class);
+//        List<HashMap> list2 = JSONObject.parseArray(s2,HashMap.class);
+//        for (HashMap hashMap : list2){
+//            System.out.println(hashMap.keySet());
+//        }
+//        for (HashMap hashMap : list1){
+//            System.out.println(hashMap.get("value")+","+hashMap.get("expression"));
+//            if (hashMap.get("value").equals(hashMap.get("expression"))){
+//                System.out.println("Pass");
+//            }else{
+//                System.out.println("Fail");
+//            }
+//        }
 
 
 
