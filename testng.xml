@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All Test Suite"><test verbose="2" preserve-order="true" name="D:/Lemon_Java20_maven"><classes/></test></suite>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="TestNGDemo">
+        <classes>
+            <class name="class0722.Homework.TestNGDemo"/>
+        </classes>
+    </test>
+</suite>
