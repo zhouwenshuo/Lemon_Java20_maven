@@ -1,0 +1,84 @@
+1、testng
+	简介：	testng是一个单元测试框架，它提供了一系列的丰富注解（标签）
+	来帮助我们很方便的编写和管理被测项目的测试类和测试方法，
+	而且功能比junit更强大，支持依赖测试，忽略测试，异常测试，超时测试，分组测试等多种测试场景。
+	坐标：
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.11</version>
+			<scope>test</scope>
+		</dependency>
+2、testng.xml
+	suite元素：测试套件（测试类的集合）
+	test元素：测试模块
+	classes：测试类集合
+	class：测试类的路径
+	在项目的根目录底下创建testng.xml
+	一个suite（套件）由一个或多个测试模块构成
+	一个test（测试）是由多个类组成
+	
+	testng.xml 执行测试用例时首先按照class排序执行，class里面方法按照英文自然排序执行。
+	
+3、了解注解
+	dependsOnMethods 测试方法依赖于某方法
+	@Test(enabled = false)
+4、常用注解
+	配置注解的作用：用于完成测试前的准备工作
+	@BeforeSuite/@AfterSuite 标记的方法：在某个测试套件（suite）开始之前运行/在某个测试套件所有测试方法执行之后运行
+	@BeforeTest/@AfterTest标记的方法： 在某个测试（test）开始之前运行/在某个测试下的所有测试类中的测试方法执行之后运行
+	@BeforeClass/@AfterClass标记的方法：在某个测试类（class）开始之前运行/在某个测试类中的所有测试方法执行之后运行
+	@BeforeMethod/@AfterMethod标记的方法： 在某个测试方法（method）之前运行/在某个测试方法执行之后运行	
+
+5、重点掌握注解！！！！！
+	@DataProvider	数据支持
+	注意：
+		1、使用此注解的方法的返回值必须是：Object[][] 或者 Iterator<Object[]>！！！！！！
+		2、参数个数！！！！类型！！！！必须匹配
+		3、可以接受集合、自定义类型
+6、ITestContext（了解）
+测试上下文、缓存
+
+7、参数化测试(数据驱动测试)：	
+	a、testng.xml定义parameter
+		<parameter name="host" value="http://localhost/"></parameter>
+		<parameter name="browserType" value="firefox"></parameter>
+		配合 @Parameters(value={"browserType"}) 一起使用
+		局限性：通过parameters注入的参数必须定义在testng.xml中
+	b、DataProviders
+		利用此注解标注一个方法，注解需指定一个name属性。方法返回值为一个Object类型的二维数组。
+		注入dataprovider的数据时，test方法必须声明此dataprovider属性，值为前面定义处的name值。
+		使用dataprovider时，若没有声明则为方法名。在测试方法上引用此dataprovider时需要指向对应的name值
+		@DataProvider(name="datas")
+		public Object [][] dataProvider(){
+			//...
+		}
+		@Test(dataProvider="datas")
+		public void test2(String p1...){
+			//...
+		}
+		优点：可传入普通的参数重复测试相同的接口
+		
+HTTP协议：
+		1、分为客户端请求和服务端响应，无状态的协议。
+		2、HTTP协议重点包含报文。
+		报文：
+			URL：接口地址
+			method：接口的请求方式
+			（接口的功能决定请求方式。例如：查询是get。增加是post，删除delete，全部更新put，部分更新：patch）
+			头部字段：
+				描述请求或者响应的详细信息。
+				Content-Type
+			状态码：
+				100	请求中 
+				200	正确
+				300	缓存、重定向
+				400 客户端问题
+				500	服务端问题
+	
+	
+	
+	
+	
+	
+	
