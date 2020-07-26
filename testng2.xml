@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="XXX项目">
+    <test name="注册接口">
+        <classes>
+            <class name="class0724.TestNGParameter"/>
+            <parameter name="type" value="chrome"></parameter>
+            <parameter name="sheetindex" value="1"></parameter>
+        </classes>
+    </test>
+
+    <test name="注册接口2">
+        <classes>
+            <class name="class0724.TestNGParameter2"/>
+            <parameter name="type" value="FireFox"></parameter>
+            <parameter name="sheetindex" value="2"></parameter>
+        </classes>
+    </test>
+
+</suite>
