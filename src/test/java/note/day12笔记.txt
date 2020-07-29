@@ -1,0 +1,146 @@
+1、httpClient
+	HttpClient 是Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。
+	okhttp Feign
+	http://www.lemfix.com/topics/363
+2、坐标
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5.6</version>
+	</dependency>
+	公共配置
+	<properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <!-- 文件拷贝时的编码 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- 编译时的编码 -->
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    </properties>
+3、异常
+	程序的错误。
+	编译时异常(未雨绸缪)
+		IO异常，必须要处理的异常，可以抛出 throw，也可以是try catch 捕获。
+	运行时异常
+		空指针、数组下标越界。
+	如何处理
+		抛出异常表示自己不处理，教给调用者处理，如果没有一个人主动处理，虚拟机直接抛出异常。
+		
+		捕获异常表示自己处理，处理之后的代码还能继续执行。
+			try{
+				//1
+			}catch(Exception e) {
+				//2
+			} finally {	//可选
+				//不管是否发生异常，finally都会执行。
+			}	
+			//3 catch之后代码还能继续执行。
+4、链式编程
+	当一个方法的返回值是对象时，可以继续用点来调用这个对象的其他方法。
+	例如：
+		int statusCode = response.getStatusLine().getStatusCode();
+		相当于：
+			StatusLine statusLine = response.getStatusLine();
+			int statusCode = statusLine.getStatusCode();
+	
+5、get
+	/*
+	 * 1、创建request连接.
+	 * 2、填写url和参数
+	 * 3、如果有参添加参数
+	 * 4、发送请求
+	 * 5、获取响应报文
+	 * 6、格式化
+	 * 7、在控制台输出报文
+	*/
+	
+	String url = "http://api.lemonban.com/futureloan/loans";
+	HttpGet get = new HttpGet(url);
+	//3、添加头信息
+	get.setHeader("X-Lemonban-Media-Type","lemonban.v1");
+//		get.setHeader("Content-Type","application/json");
+	//4、发送请求	
+	HttpClient client = HttpClients.createDefault();
+	//处理异常两种方式：抛出去（交给别人处理，自己不处理），捕获（如果出现了异常，自己立马处理）
+	try {
+		//4.1、发出请求获得响应对象
+		HttpResponse response = client.execute(get);
+		//5、获取响应报文
+		//5.1、获取状态码
+		//链式编程 相当于下面两行代码
+//			int statusCode = response.getStatusLine().getStatusCode();//200 404
+		StatusLine statusLine = response.getStatusLine();
+		int statusCode = statusLine.getStatusCode();
+		//6、格式化
+		HttpEntity entity = response.getEntity();
+		String result = EntityUtils.toString(entity);
+		//6.1、获取头信息
+		String allHeaders = Arrays.toString(response.getAllHeaders());
+		System.out.println("响应报文头信息：" + allHeaders);
+		System.out.println("状态码：" + statusCode);
+		System.out.println("响应报文头报文：" + result);
+	} catch (IOException e) {
+		//IOException 是编译时异常。
+		//处理异常的代码。
+		e.printStackTrace();
+	}
+	 
+	
+6、post
+	/*
+	 * 1、创建request连接.
+	 * 2、填写url和参数
+	 * 3、如果有参添加参数
+	 * 4、发送请求
+	 * 5、获取响应报文
+	 * 6、格式化
+	 * 7、在控制台输出报文
+	*/
+	String url = "http://api.lemonban.com/futureloan/member/register";
+	HttpPost post = new HttpPost(url);
+	HttpClient client = HttpClients.createDefault();
+	//处理异常两种方式：抛出去（交给别人处理，自己不处理），捕获（如果出现了异常，自己立马处理）
+	try {
+		//3、绑定参数
+		//3.1、设置请求头，以表单的方式提交参数
+		post.setHeader("X-Lemonban-Media-Type","lemonban.v1");
+		post.setHeader("Content-Type","application/json");
+		String args = "{\"mobile_phone\": \"13888888811\",\"pwd\": \"12345678\"}";
+		post.setEntity(new StringEntity(args,"UTF-8"));
+		//4、发送请求	
+		//4.1、发出请求获得响应对象
+		HttpResponse response = client.execute(post);
+		//5、获取响应报文
+		//5.1、获取状态码
+		//链式编程 相当于下面两行代码
+		int statusCode = response.getStatusLine().getStatusCode();//200 404
+		//6、格式化
+		HttpEntity entity = response.getEntity();
+		String result = EntityUtils.toString(entity);
+		//6.1、获取头信息
+		String allHeaders = Arrays.toString(response.getAllHeaders());
+		// ctrl + 2 + l
+		System.out.println("响应报文头信息：" + allHeaders);
+		System.out.println("状态码：" + statusCode);
+		System.out.println("响应报文头报文：" + entity);
+		System.out.println("响应报文头报文：" + result);
+		
+	} catch (IOException e) {
+		//IOException 是编译时异常。
+		//处理异常的代码。
+		e.printStackTrace();
+	}
+	 
+	 
+7、设置代理
+	什么是代理？
+	中间商
+	HttpHost proxy = new HttpHost("127.0.0.1",8889);
+	HttpResponse response = client.execute(proxy,post);
+
+8、方法封装
+	抽取HttpUtils工具类，封装get/post请求，统一参数url、parameters
+
+
+	 

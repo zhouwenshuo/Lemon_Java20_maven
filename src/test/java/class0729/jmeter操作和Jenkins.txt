@@ -1,0 +1,60 @@
+1、jmetre操作
+	1、线程组
+		作用：设置访问线程数
+	2、线程组添加-取样器-HTTP请求
+		作用：发送http请求
+	3、HTTP请求添加-后置处理器-json提取器
+		作用：接口放回响应之后，使用jsonpath获取响应内容
+	4、线程组添加-配置元件-HTTP请求消息头管理器
+		作用：设置默认请求头
+	5、线程组添加-配置元件-HTTP请求默认值
+		作用：设置默认请求信息
+	6、线程组添加-配置元件-用户定义的变量
+		作用：类似一个全局的Map，在所有请求中都能使用，使用${变量名}调用
+	7、线程组添加-配置元件-CSV数据文件设置
+		作用：外部参数化文件，使用${列名}调用，配合线程数能实现多次请求。
+	8、线程组添加-监听器-查看结果树
+		作用：查看所有接口请求信息
+2、maven项目执行jmeter
+	1、新建maven项目
+	2、在test目录下新建jmeter和resources文件夹
+	3、把java19_jmeter.jmx、jmeter.properties（老师提供）、lemon.CSV文件复制到jmeter目录下。
+	4、把jmeter-results-report-apitest.xsl（jmeter报告页面）复制resources目录下。
+	5、在pom.xml新增properties和 jmeter-maven-plugin插件。
+	6、注意点：
+		1、<jMeterTestFile>jmeter文件名称</jMeterTestFile>
+		2、
+			<groupId>com.lazerycode.jmeter</groupId>
+	        <artifactId>jmeter-maven-plugin</artifactId>
+	        <version>2.9.0</version>
+
+	        <groupId>org.codehaus.mojo</groupId>
+            <artifactId>xml-maven-plugin</artifactId>
+            <version>1.0.2</version>
+          	根据jmeter版本升降级
+    7、使用maven verify运行代码
+3、Jenkins安装和运行代码
+	1、Jenkins安装
+		CI\CD
+		CI:持续集成，代码合并、构建、部署、测试都在一起，不断执行这个过程。好处：早发现bug，从而使问题尽早暴露和解决。
+		CD:持续交付，CI的扩展，部署到生产环境，达到交付给客户。好处：所有流程自动化执行，迅速迭代版本。
+		pipeline：CI\CD自动化脚本
+		1、解压apache-tomcat-8.5.41-windows-x64.zip到非中文和特殊字符目录
+		2、复制jenkins.war到apache-tomcat-8.5.41\webapps下
+		3、解压.jenkins.zip到到非中文和特殊字符目录，配置JENKINS_HOME环境变量，并指向.jenkins文件夹。
+		4、双击apache-tomcat-8.5.41\bin\startup.bat启动项目（默认端口8080）
+		5、输入：http://localhost:8080/jenkins/ 用户名：java15，密码：123456
+	2、Jenkins配置
+		1、Global Tool Configuration
+		maven配置
+			选择本地maven的settings.xml 
+		JDK安装
+			选择本地jdk
+		maven安装
+			选择本地maven
+	3、创建项目
+		1、填写项目名称，选择freestyle项目
+		2、源码管理 	 无
+		3、到.jenkins\workspace 目录下新建一个和项目名称一样的文件夹：例如java19_jmeter
+		4、构建-增加构建步骤-Execute Windows batch command（相当于cmd黑窗口）
+		输入：mvn verify  注意：需要把maven/bin目录配置到path路径中。

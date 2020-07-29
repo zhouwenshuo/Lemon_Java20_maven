@@ -1,0 +1,7 @@
+1、修改 xxx.jmx 中 lemon.csv 文件为相对路径。
+2、修改pom.xml中 xxx.jmx名称
+	<jMeterTestFile>HTTP请求_java20.jmx</jMeterTestFile>
+3、执行maven verify 命令
+4、再tartget\jmeter\html 查看报告
+
+	
