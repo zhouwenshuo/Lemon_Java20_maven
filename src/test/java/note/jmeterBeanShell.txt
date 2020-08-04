@@ -1,0 +1,47 @@
+1、jmetre BeanShell 分类
+	定时器：　　		BeanShell Timer
+	前置处理器：		BeanShell PreProcessor		（掌握）
+	采样器：　　		BeanShell Sampler			（掌握）
+	后置处理器：		BeanShell PostProcessor		（掌握）
+	断言：　　　		BeanShell断言
+	监听器：　　		BeanShell Listener
+
+
+2、内置对象
+	1、log 
+		log.info("测试。。。。。。。。");
+		log.error("测试。。。。。。。。");
+		log.warn("测试。。。。。。。。");
+	2、vars
+		操作jmeter变量，这个变量实际引用了JMeter线程中的局部变量容器（本质上是Map），它是测试用例与BeanShell交互的桥梁，常用方法：
+		vars.get(String key)：从jmeter中获得变量值
+		vars.put(String key，String value)：数据存到jmeter变量中
+		vars.getObject(String key)：从jmeter中获得变量值
+		vars.putObject(String key，Object value)：数据存到jmeter变量中
+		代码1：
+		vars.putObject("code",200);
+		int code = (int)vars.getObject("code");
+		System.out.println(".........."+code);
+		代码2：
+		vars.put("code","200");
+		String code = vars.get("code");
+		System.out.println(".........."+code);
+	3、props
+		java.util.Properties类，操作jmeter属性，用于读取jmeter.properties中内容。
+		props.get(String key);
+		props.put(String key,String value);
+	4、vars和props区别
+		相同线程组中用vars传递参数，不同线程组中用props传递属性。
+	5、prev
+		https://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html
+		获取前面的sample（取样器）返回的信息，常用方法：
+		a) getResponseDataAsString()：获取响应信息
+		b) getResponseCode() ：获取响应code
+		c）getRequestHeaders() ：获取请求头
+		d）getResponseHeaders() ：获取响应头
+3、如何使用beanshell编写功能
+	1、工具类jar包复制到 jmeter_home\lib\ext 中
+	2、在6中 BeanShell 中 编写java代码
+		注意：
+			1、需要写import 导包语句，不需要main方法直接写代码。
+			2、可以写方法，方法必须写在调用前。
