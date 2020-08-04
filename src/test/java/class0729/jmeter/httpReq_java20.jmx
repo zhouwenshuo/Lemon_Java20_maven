@@ -154,7 +154,7 @@
           </HeaderManager>
           <hashTree/>
           <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell 预处理程序" enabled="true">
-            <stringProp name="filename"></stringProp>
+            <stringProp name="filename">lemon.csv</stringProp>
             <stringProp name="parameters"></stringProp>
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="script">//log.info(vars.get(&quot;token&quot;));

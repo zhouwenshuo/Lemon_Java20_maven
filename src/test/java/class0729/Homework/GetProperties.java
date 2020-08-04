@@ -34,17 +34,23 @@ import java.util.Properties;
  * 　　　　　　┗┻┛　┗┻┛+ + + +
  */
 public class GetProperties {
-    private String file_path = "src\\test\\java\\class0729\\Homework\\config.properties";
+    private String file_path = "src/test/java/class0729/Homework/config.properties";
 
     public String getProperties(String option) throws IOException {
-        Properties properties = null;
+        Properties properties = new Properties();
         File file = new File(file_path);
         FileInputStream fis = new FileInputStream(file);
         assert false;
         properties.load(fis);
-        System.out.println("USERNAME:"+properties.getProperty("USERNAME"));
-        System.out.println("PASSWORD:"+properties.getProperty("PASSWORD"));
+//        System.out.println("USERNAME:"+properties.getProperty("USERNAME"));
+//        System.out.println("PASSWORD:"+properties.getProperty("PASSWORD"));
         fis.close();
         return properties.getProperty(option);
+    }
+
+    public static void main(String[] args) throws IOException {
+        GetProperties getProperties = new GetProperties();
+        String res = getProperties.getProperties("USERNAME");
+        System.out.println(res);
     }
 }
